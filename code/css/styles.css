@@ -101,7 +101,7 @@ nav, footer {
 
 #home::after {
     content: "";
-    background: url(/code/img/home-background.jpg);
+    background: url(../img/home-background.jpg);
     opacity: 0.5;
     top: 0;
     left: 0;
