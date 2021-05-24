@@ -1,4 +1,4 @@
-let url = 'http://api.mediastack.com/v1/news?access_key=30bf16ca32e9578d975e9d6ee9055cf6&languages=en';
+let url = 'http://api.mediastack.com/v1/news?access_key=7948ceebf2c8421e98642fe1ebb4826e&languages=en';
 
 const countries = {
     'ar': 'Argentina',
