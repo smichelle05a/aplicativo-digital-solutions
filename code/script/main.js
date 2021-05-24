@@ -10,6 +10,16 @@ const countries = {
     've': 'Venezuela'
 };
 
+const runBackup = (e) => {
+    console.error('Error intentando obtener información de api.mediastack.com =>', e);
+    console.warn('Se reemplazó la API por la siguiente dirección: https://mov0g.mocklab.io/news');
+    fetch(backupUrl).then(async res => {
+        let news = await res.json();
+        news = news.data;
+        buildTable(news);
+    });
+}
+
 const buildTable = (news) => {
     let tableData = '';
     news.forEach(post => {
@@ -30,18 +40,14 @@ const buildTable = (news) => {
     document.querySelector('#newsData').innerHTML += tableData;
 };
 
-let apiRequest = fetch(url).then(async res => {
+let apiRequest = fetch(url).then(async (res) => {
     let news = await res.json();
     if (!news.error) {
         news = news.data;
         buildTable(news);
     } else {
-        console.error('Error intentando obtener información de api.mediastack.com =>', news.error.message);
-        console.warn('Se reemplazó la API por la siguiente dirección: https://mov0g.mocklab.io/news');
-        fetch(backupUrl).then(async res => {
-            news = await res.json();
-            news = news.data;
-            buildTable(news);
-        });
+        runBackup(news.error.message);
     }
+}).catch(e => {
+    runBackup(e);
 });
