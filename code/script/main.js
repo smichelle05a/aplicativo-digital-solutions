@@ -1,4 +1,4 @@
-let url = 'https://api.mediastack.com/v1/news?access_key=7948ceebf2c8421e98642fe1ebb4826e&languages=en';
+let url = 'http://api.mediastack.com/v1/news?access_key=7948ceebf2c8421e98642fe1ebb4826e&languages=en';
 let backupUrl = 'https://mov0g.mocklab.io/news';
 
 const countries = {
