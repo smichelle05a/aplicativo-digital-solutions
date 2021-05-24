@@ -1,4 +1,5 @@
 let url = 'http://api.mediastack.com/v1/news?access_key=7948ceebf2c8421e98642fe1ebb4826e&languages=en';
+let backupUrl = 'https://mov0g.mocklab.io/news';
 
 const countries = {
     'ar': 'Argentina',
@@ -9,9 +10,7 @@ const countries = {
     've': 'Venezuela'
 };
 
-let apiRequest = fetch(url).then(async res => {
-    let news = await res.json();
-    news = news.data;
+const buildTable = (news) => {
     let tableData = '';
     news.forEach(post => {
         let { author, title, url, source, category, country } = post;
@@ -28,7 +27,21 @@ let apiRequest = fetch(url).then(async res => {
             <td>${date}</td>
         </tr>`;
     });
-
     document.querySelector('#newsData').innerHTML += tableData;
-})
+};
 
+let apiRequest = fetch(url).then(async res => {
+    let news = await res.json();
+    if (!news.error) {
+        news = news.data;
+        buildTable(news);
+    } else {
+        console.error('Error intentando obtener información de api.mediastack.com =>', news.error.message);
+        console.warn('Se reemplazó la API por la siguiente dirección: https://mov0g.mocklab.io/news');
+        fetch(backupUrl).then(async res => {
+            news = await res.json();
+            news = news.data;
+            buildTable(news);
+        });
+    }
+});
