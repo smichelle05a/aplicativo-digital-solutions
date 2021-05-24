@@ -1,0 +1,29 @@
+video {
+    width: 80%;
+    height: auto;
+}
+
+.video-container {
+    display: flex;
+    flex-direction: row;
+    padding: 2rem;
+    align-items: stretch;
+    background-color: lightgrey;
+    margin: 1rem 0;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 2rem;
+}
+
+@media (max-width: 760px) {
+    .video-container {
+        flex-direction: column;
+    }
+    video {
+        width: 100%;
+    }
+}
